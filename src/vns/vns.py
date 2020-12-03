@@ -1,7 +1,7 @@
 #encoding:utf8
 from reportlab.lib import colors
 from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import A4
+from reportlab.lib import pagesizes
 from reportlab.lib.units import cm
 from reportlab.lib.units import mm
 import math
@@ -9,11 +9,15 @@ import math
 #Details please refere http://www.reinervogel.net/index_e.html?/Plattform/plattform_VNS_e.html
 #Please change next EQ platform varaiables to fit your design;
 
-def generate_pdf(primarylength=850, latitude_degree=40, half_string_len=350, size=A4):
+def generate_pdf(primarylength=850, latitude_degree=40, half_string_len=350, size_str="A4"):
 
   # primarylength=850
   # latitude_degree=40
   # half_string_len=350
+  try:
+    size = getattr(pagesizes, size_str)
+  except:
+    raise Exception(f'Size {size_str} not found')
 
   beta=45/2/180*math.pi
   latitude=latitude_degree/180*math.pi
@@ -111,8 +115,8 @@ def generate_pdf(primarylength=850, latitude_degree=40, half_string_len=350, siz
         c.line(sectorpoints_alpha_beta[i][0],sectorpoints_alpha_beta[i][1],sectorpoints_alpha_beta[i][0]+3,sectorpoints_alpha_beta[i][1])
       if i == int(23*cm):
         c.drawString(sectorpoints_alpha_beta[i][0],sectorpoints_alpha_beta[i][1]-0.3*cm, "Circle*cos(a)/cos(b)")
-
-  c = canvas.Canvas("/tmp/vnc"+str(int(latitude/math.pi*180))+".pdf",pagesize=size)
+  filename = f"/tmp/vnc-pl_{str(primarylength)}-hsl_{str(half_string_len)}-lat_{str(latitude_degree)}-size_{size_str}.pdf"
+  c = canvas.Canvas(filename,pagesize=size)
   # move the origin up and to the right
   c.translate(5*cm,1*cm)
   draw_axis(c)
@@ -120,7 +124,7 @@ def generate_pdf(primarylength=850, latitude_degree=40, half_string_len=350, siz
   draw_sector(c)
   c.showPage()
   c.save()
-  print("Finished, please check:"+"vnc"+str(int(latitude/math.pi*180))+".pdf")
-  return f"/tmp/vnc{str(int(latitude/math.pi*180))}.pdf"
+  print("Finished, please check:"+filename)
+  return filename
 
 

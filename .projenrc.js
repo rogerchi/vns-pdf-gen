@@ -13,6 +13,8 @@ const project = new AwsCdkTypeScriptApp({
     '@aws-cdk/aws-lambda-python',
     '@aws-cdk/aws-apigatewayv2',
     '@aws-cdk/aws-apigatewayv2-integrations',
+    '@aws-cdk/aws-cloudfront',
+    '@aws-cdk/aws-cloudfront-origins',
   ],
 
   /* AwsCdkTypeScriptAppOptions */

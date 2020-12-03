@@ -79,6 +79,30 @@
     "@aws-cdk/core" "1.76.0"
     constructs "^3.2.0"
 
+"@aws-cdk/aws-cloudfront-origins@^1.76.0":
+  version "1.76.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-cloudfront-origins/-/aws-cloudfront-origins-1.76.0.tgz#82f3afb8062e5c117cb643be344e6f905031f409"
+  integrity sha512-vRgePnJ4pUb782x9kuVedPLsbewAHSvrqjYgXMe5i5PYHQGKHt+kYTSyf9WSR+qyPmIE8ylzGdeinRj4TMSXnw==
+  dependencies:
+    "@aws-cdk/aws-cloudfront" "1.76.0"
+    "@aws-cdk/aws-elasticloadbalancingv2" "1.76.0"
+    "@aws-cdk/aws-s3" "1.76.0"
+    "@aws-cdk/core" "1.76.0"
+    constructs "^3.2.0"
+
+"@aws-cdk/aws-cloudfront@1.76.0", "@aws-cdk/aws-cloudfront@^1.76.0":
+  version "1.76.0"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-cloudfront/-/aws-cloudfront-1.76.0.tgz#d9eacf1987cb79160d7f417db52cb2188af1176a"
+  integrity sha512-lkE6U+/usxlYzKbuxKjO9OPmFXv/cVmEr9pdvongOmlHILlenb/4Z6sQV8TzMBQa4MF7UHck3cksUt5J1pShZg==
+  dependencies:
+    "@aws-cdk/aws-certificatemanager" "1.76.0"
+    "@aws-cdk/aws-iam" "1.76.0"
+    "@aws-cdk/aws-kms" "1.76.0"
+    "@aws-cdk/aws-lambda" "1.76.0"
+    "@aws-cdk/aws-s3" "1.76.0"
+    "@aws-cdk/core" "1.76.0"
+    constructs "^3.2.0"
+
 "@aws-cdk/aws-cloudwatch@1.76.0":
   version "1.76.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-cloudwatch/-/aws-cloudwatch-1.76.0.tgz#6775550d0a5628512d2463969d1e552a9a28c671"

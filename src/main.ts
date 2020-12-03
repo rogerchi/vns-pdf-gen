@@ -1,9 +1,11 @@
-import * as cdk from '@aws-cdk/core';
+import * as path from 'path';
 import * as api from '@aws-cdk/aws-apigatewayv2';
 import * as integrations from '@aws-cdk/aws-apigatewayv2-integrations';
-import * as python from '@aws-cdk/aws-lambda-python';
+import * as cloudfront from '@aws-cdk/aws-cloudfront';
+import * as origins from '@aws-cdk/aws-cloudfront-origins';
 import * as lambda from '@aws-cdk/aws-lambda';
-import * as path from 'path';
+import * as python from '@aws-cdk/aws-lambda-python';
+import * as cdk from '@aws-cdk/core';
 
 export class VnsPdfGenerator extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props: cdk.StackProps = {}) {
@@ -31,6 +33,25 @@ export class VnsPdfGenerator extends cdk.Stack {
 
     new cdk.CfnOutput(this, 'Api', {
       value: httpApi.apiEndpoint,
+    });
+
+    const cachePolicy = new cloudfront.CachePolicy(this, 'CachePolicy', {
+      queryStringBehavior: cloudfront.CacheQueryStringBehavior.all(),
+      defaultTtl: cdk.Duration.days(365),
+      maxTtl: cdk.Duration.days(365),
+    });
+
+    const cf = new cloudfront.Distribution(this, 'CF', {
+      defaultBehavior: {
+        origin: new origins.HttpOrigin(
+          `${httpApi.httpApiId}.execute-api.${this.region}.${this.urlSuffix}`,
+        ),
+        cachePolicy,
+      },
+    });
+
+    new cdk.CfnOutput(this, 'CFDomain', {
+      value: cf.distributionDomainName,
     });
   }
 }

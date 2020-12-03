@@ -42,9 +42,15 @@ def handler(event, context):
     return return_error('Missing half_string_len')
 
   try:
-    pdf_path = vns.generate_pdf(primarylength, latitude_degree, half_string_len)
+    size = event['queryStringParameters']['size']
+  except:
+    print('No size given, using default A4')
+    size = 'A4'
+
+  try:
+    pdf_path = vns.generate_pdf(primarylength, latitude_degree, half_string_len, size)
   except Exception as e:
     print(e)
-    return return_error('Error generating PDF')
+    return return_error(f'Error generating PDF ({e})')
 
   return return_pdf(pdf_path)
