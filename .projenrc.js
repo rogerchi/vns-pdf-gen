@@ -1,8 +1,19 @@
-const { AwsCdkTypeScriptApp } = require('projen');
+const { AwsCdkTypeScriptApp, JsonFile } = require('projen');
 
 const project = new AwsCdkTypeScriptApp({
-  cdkVersion: '1.73.0',
+  cdkVersion: '1.76.0',
   name: 'vns-pdf-gen',
+  authorEmail: 'roger@rogerchi.com',
+  authorName: 'Roger Chi',
+  authorOrganization: 'Roger Chi Consulting',
+  authorUrl: 'https://rogerchi.com',
+  cdkDependencies: [
+    '@aws-cdk/core',
+    '@aws-cdk/aws-lambda',
+    '@aws-cdk/aws-lambda-python',
+    '@aws-cdk/aws-apigatewayv2',
+    '@aws-cdk/aws-apigatewayv2-integrations',
+  ],
 
   /* AwsCdkTypeScriptAppOptions */
   // appEntrypoint: 'main.ts',                                                 /* The CDK app's entrypoint (relative to the source directory, which is "src" by default). */
@@ -97,6 +108,15 @@ const project = new AwsCdkTypeScriptApp({
   // sampleCode: true,                                                         /* Generate one-time sample in `src/` and `test/` if there are no files there. */
   // tsconfig: undefined,                                                      /* Custom TSConfig. */
   // typescriptVersion: '^3.9.5',                                              /* TypeScript version to use. */
+});
+
+new JsonFile(project, '.prettierrc', {
+  obj: {
+    semi: true,
+    tabWidth: 2,
+    trailingComma: 'all',
+    singleQuote: true,
+  },
 });
 
 project.synth();

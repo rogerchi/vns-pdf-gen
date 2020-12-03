@@ -62,3 +62,4 @@ cdk.out/
 !/tsconfig.jest.json
 !/.eslintrc.json
 !/cdk.json
+!/.prettierrc
