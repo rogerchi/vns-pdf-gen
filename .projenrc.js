@@ -16,7 +16,7 @@ const project = new AwsCdkTypeScriptApp({
     '@aws-cdk/aws-cloudfront',
     '@aws-cdk/aws-cloudfront-origins',
   ],
-
+  defaultReleaseBranch: 'main',
   /* AwsCdkTypeScriptAppOptions */
   // appEntrypoint: 'main.ts',                                                 /* The CDK app's entrypoint (relative to the source directory, which is "src" by default). */
   // cdkDependencies: undefined,                                               /* Which AWS CDK modules (those that start with "@aws-cdk/") this app uses. */
